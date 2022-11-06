@@ -11,7 +11,7 @@ function toggleBars() {
       <Navbar @toggle-menu="toggleBars" />
       <div class="w-full content flex">
          <Sidebar :is_open=is_open :role=role />
-         <div class="w-full  p-8 duration-300" >
+         <div class="w-full p-8 duration-300" >
             <slot />
          </div>
       </div>

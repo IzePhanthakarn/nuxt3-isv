@@ -34,10 +34,9 @@ const chartOptions = {
       colors: ['transparent']
    },
    xaxis: {
-      categories: ['Sunday', 'Mondat', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       labels: {
          style: {
-            // colors: '#f5f5f7',
             fontWeight: 700,
             fontSize: 14,
             fontFamily: 'K2D, sans-serif'
@@ -48,7 +47,6 @@ const chartOptions = {
       title: {
          text: 'Baht (฿)',
          style: {
-            // color: '#f5f5f7',
             fontWeight: 700,
             fontSize: 16,
             fontFamily: 'K2D, sans-serif'
@@ -56,7 +54,6 @@ const chartOptions = {
       },
       labels: {
          style: {
-            // colors: '#f5f5f7',
             fontWeight: 700,
             fontSize: 12,
             fontFamily: 'K2D, sans-serif'
@@ -78,11 +75,11 @@ const chartOptions = {
 
 const defaultMoney = ref(100);
 let displayMoney = 100;
-console.log('data '+displayMoney)
+// console.log('data ' + displayMoney)
 const series = [
    {
       name: 'Total pay today',
-      data: [69]
+      data: [69, 0, 0, 0, 0, 0, 0]
    },
    {
       name: 'The amount of money should be used',
@@ -90,25 +87,26 @@ const series = [
    }
 
 ];
-console.log(series)
+// console.log(series)
 function setDefault() {
    displayMoney = defaultMoney.value;
-   console.log('data '+displayMoney)
+   // console.log('data ' + displayMoney)
    series[1].data = [displayMoney, displayMoney, displayMoney, displayMoney, displayMoney, displayMoney, displayMoney];
-   console.log(series);
+   // console.log(series);
 }
 </script>
 
 <template>
    <div class="h-full flex flex-col p-4 bg-neutral border-4 border-neutral shadow-md text-neutral-focus rounded-xl">
-      <div class="w-full flex justify-between items-center">
-         <div class="flex items-center space-x-2 text-2xl font-medium text-base-100 mb-4">
+      <div class="w-full flex justify-between items-center mb-4">
+         <div class="flex items-center space-x-2 text-2xl font-medium text-base-100">
             <Icon name="nimbus:cash" size="32" />
             <p>Money usage chart</p>
          </div>
-         <form @submit.prevent="setDefault">
-            <input type="number" v-model="defaultMoney">
-            <button type="submit">set</button>
+         <form class="flex items-center text-xs font-bold " @submit.prevent="setDefault">
+            <input type="text" v-model="defaultMoney" class="w-12 p-2 rounded-l-md outline-none">
+            <button type="submit"
+               class="uppercase text-base-100 bg-primary hover:bg-primary-focus p-[8.24px] rounded-r-md">set</button>
          </form>
       </div>
       <ClientOnly>
