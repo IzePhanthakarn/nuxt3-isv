@@ -1,4 +1,8 @@
 <script setup lang="ts">
+const props = defineProps<{
+   chart_height: string
+}>()
+
 const chartOptions = {
    chart: {
       toolbar: {
@@ -79,7 +83,7 @@ let displayMoney = 100;
 const series = [
    {
       name: 'Total pay today',
-      data: [69, 0, 0, 0, 0, 0, 0]
+      data: [69, 50, 0, 0, 0, 0, 0]
    },
    {
       name: 'The amount of money should be used',
@@ -110,7 +114,7 @@ function setDefault() {
          </form>
       </div>
       <ClientOnly>
-         <apexchart class="bg-neutral-content rounded-2xl" type="bar" height="350" :options="chartOptions"
+         <apexchart class="bg-neutral-content rounded-2xl" type="bar" :height=props.chart_height :options="chartOptions"
             :series="series"></apexchart>
       </ClientOnly>
    </div>

@@ -13,3 +13,8 @@ export interface Gatget {
    link: string
    role?: string
 }
+
+export interface TodoItem {
+   text: string
+   done: boolean
+}

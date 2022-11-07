@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { Gatget } from '~/assets/interface'
+import { Gatget, TodoItem } from '~/assets/interface'
+
 const serverUsed = 134;
 const totalUser = 23;
 const totalPlan = 4;
 const statusHealth = 'Good'
 const temperature = 27;
 const totalWallet = '43.20K';
+const planTitle = ref('today')
+let role = 'admin';
 const gatgets: Gatget[] = [
    { title: 'Total User', icon: 'uil:user-square', value: `${totalUser} Accounts`, role: 'admin', link: '/user' },
    { title: 'Unfinished', icon: 'uil:clipboard-notes', value: `${totalPlan} Plans`, link: '/plan' },
@@ -13,27 +16,40 @@ const gatgets: Gatget[] = [
    { title: 'Broken clouds', icon: 'uil:clouds', value: `${temperature} Celsius`, link: '/' },
    { title: 'In the wallet', icon: 'uil:wallet', value: `${totalWallet} Baht`, link: '/wallet' }
 ]
-let role = 'admin';
 
 const menuList = gatgets.filter((menu) => {
    let menuFilter = (role === 'admin') ? menu : menu.role != 'admin';
    return menuFilter;
 })
 
-const planTitle = ref('today')
-
-interface TodoItem {
-   text: string
-   done: boolean
-}
-
-const todoInput = ref('')
 const todoList = ref<TodoItem[]>([
    { text: 'Have a lunch', done: false },
    { text: 'Learn to Code', done: false },
    { text: 'Go jogging', done: false }
 ])
 
+function getWindowHeight() {
+   try {
+      const windowHeight = innerHeight;
+      return windowHeight
+   } catch (e) {
+      // [Vue warn]: Hydration node mismatch
+   }
+}
+const chartHeight = ` ${getWindowHeight() - 433.469}`;
+const planHeight = ` ${getWindowHeight() - 460}`;
+
+function definePlanHeight(){
+   try{
+      const todoListEl = document.getElementById('todoListEl')
+      todoListEl.style.height = `${planHeight}px`;
+   } catch(e){
+      // Hydration completed but contains mismatches.
+   }
+}
+definePlanHeight();
+
+const todoInput = ref('')
 function addList() {
    todoList.value.push({
       text: todoInput.value,
@@ -45,6 +61,7 @@ function addList() {
 function deleteList(index: number) {
    todoList.value.splice(index, 1)
 }
+
 useHead({
    title: 'Dashboard'
 })
@@ -80,7 +97,7 @@ useHead({
          </div>
       </div>
       <div class="w-full h-full grid grid-cols-3 gap-5 mt-5">
-         <MoneyChart class="col-span-2" />
+         <MoneyChart :chart_height=chartHeight class="col-span-2" />
          <div
             class="h-full flex flex-col p-4 bg-neutral border-4 border-neutral shadow-md text-neutral-focus rounded-xl">
             <div class="w-full flex justify-between items-center mb-4">
@@ -136,7 +153,8 @@ useHead({
                </div> -->
             </div>
             <div class="w-full h-full rounded-lg rounded-tl-none bg-neutral-content p-1.5">
-               <ul class="w-full h-80 bg-base-100 font-semibold rounded-lg overflow-y-auto px-4 py-2 divide-y-2">
+               <ul id="todoListEl"
+                  class="w-full bg-base-100 font-semibold rounded-lg overflow-y-auto px-4 py-2 divide-y-2">
                   <li v-for="(todo, index) of todoList" class="flex items-center space-x-1 py-2">
                      <input v-model="todo.done" type="checkbox" class="checkbox checkbox-primary">
                      <span class="grow mb-1 px-2 decoration-2 decoration-double decoration-primary"
