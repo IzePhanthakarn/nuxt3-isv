@@ -12,7 +12,7 @@ const chartOptions = {
    colors: ['#546E7A', '#E91E63'],
    plotOptions: {
       bar: {
-         borderRadius: 2,
+         borderRadius: 7,
          columnWidth: '40%',
          dataLabels: {
             position: 'top',
@@ -83,7 +83,7 @@ let displayMoney = 100;
 const series = [
    {
       name: 'Total pay today',
-      data: [69, 50, 0, 0, 0, 0, 0]
+      data: [69, 200, 0, 0, 0, 0, 0]
    },
    {
       name: 'The amount of money should be used',

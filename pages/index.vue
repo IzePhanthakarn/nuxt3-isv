@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Gatget, TodoItem } from '~/assets/interface'
 
-const serverUsed = 134;
+const serverUsed = 28.4;
 const totalUser = 23;
 const totalPlan = 4;
 const statusHealth = 'Good'
@@ -13,7 +13,7 @@ const gatgets: Gatget[] = [
    { title: 'Total User', icon: 'uil:user-square', value: `${totalUser} Accounts`, role: 'admin', link: '/user' },
    { title: 'Unfinished', icon: 'uil:clipboard-notes', value: `${totalPlan} Plans`, link: '/plan' },
    { title: 'Health today', icon: 'icon-park-outline:muscle', value: `${statusHealth}`, link: '/health' },
-   { title: 'Broken clouds', icon: 'uil:clouds', value: `${temperature} Celsius`, link: '/' },
+   { title: 'Clear sky', icon: 'uil:clouds', value: `${temperature} Celsius`, link: '/' },
    { title: 'In the wallet', icon: 'uil:wallet', value: `${totalWallet} Baht`, link: '/wallet' }
 ]
 
@@ -75,7 +75,7 @@ useHead({
             <Icon name="ic:outline-space-dashboard" size="40" />
             <h1 class="text-3xl font-medium">Dashboard</h1>
          </div>
-         <div v-if="role === 'admin'" class="btn flex items-center space-x-2 mx-2 py-0">
+         <div v-if="role === 'admin'" class="btn flex items-center text-base-100 space-x-2 mx-2 py-0">
             <Icon name="uil:server" size="36" />
             <div class="flex flex-col items-center">
                <h1 class="text-xl font-medium tracking-wide">{{ serverUsed }} MB</h1>
@@ -156,7 +156,7 @@ useHead({
                <ul id="todoListEl"
                   class="w-full bg-base-100 font-semibold rounded-lg overflow-y-auto px-4 py-2 divide-y-2">
                   <li v-for="(todo, index) of todoList" class="flex items-center space-x-1 py-2">
-                     <input v-model="todo.done" type="checkbox" class="checkbox checkbox-primary">
+                     <input v-model="todo.done" type="checkbox" class="checkbox border-2 checkbox-primary">
                      <span class="grow mb-1 px-2 decoration-2 decoration-double decoration-primary"
                         :class="{ 'line-through': todo.done }">{{ todo.text }}</span>
                      <button class="mb-1 underline underline-offset-2 text-primary hover:text-primary-focus"

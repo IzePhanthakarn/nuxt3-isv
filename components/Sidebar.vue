@@ -22,7 +22,7 @@ const menuList = menus.filter((menu) => {
 
 <template>
    <div class="sidebar w-[76px] bg-neutral flex flex-col justify-between duration-300"
-      :class="{ 'w-60': is_open === true }">
+      :class="{ 'w-[270px]': is_open === true }">
       <ul :class="{ 'mt-3': is_open }" class="space-y-0.5 ">
          <li v-for="(menu, index) in menuList" :key="index">
             <nuxt-link :to=menu.link
@@ -39,9 +39,9 @@ const menuList = menus.filter((menu) => {
          <hr>
          <li>
             <nuxt-link to="/setting"
-               class="btn px-2 m-1 h-[40px] flex items-center justify-start rounded-xl cursor-pointer duration-300 text-base-100 "
+               class="setting btn px-2 m-1 h-[40px] flex items-center justify-start rounded-xl cursor-pointer duration-300 text-base-100 "
                :class="{ 'flex-col justify-center h-[76px] mt-2 p-0': !is_open, 'bg-neutral-focus': $route.name == 'setting' }">
-               <Icon name="uil:setting" />
+               <Icon name="uil:setting" class="icon-setting"/>
                <p class="mt-1 text-xs font-medium capitalize mx-auto" :class="{ 'ml-3 mb-1 text-base mx-4': is_open }">
                   Setting</p>
             </nuxt-link>
@@ -53,5 +53,12 @@ const menuList = menus.filter((menu) => {
 <style scoped>
 .sidebar {
    max-height: calc(100vh - 64px);
+}
+
+.setting .icon-setting{
+   transition: all .3s;
+}
+.setting:hover .icon-setting{
+   transform: rotate(60deg);
 }
 </style>
